@@ -1,41 +1,66 @@
 #include <stdio.h>
+#include <string.h>
 
-int main() {
+struct Cidade {
     int codigo;
     char nome[50];
     int populacao;
-    float area, pib;
+    float area;
+    float pib;
     float densidade_populacional;
     float pib_per_capita;
+};
 
-    printf("Digite o código da cidade: ");
-    scanf("%d", &codigo);
+void calcularDensidade(struct Cidade* cidade) {
+    cidade->densidade_populacional = cidade->populacao / cidade->area;
+    cidade->pib_per_capita = cidade->pib / cidade->populacao;
+}
 
-    printf("Digite o nome da cidade: ");
-    getchar();
-    fgets(nome, sizeof(nome), stdin);
+void exibirCidade(struct Cidade cidade) {
+    printf("\nCódigo: %d\n", cidade.codigo);
+    printf("Nome: %s", cidade.nome);
+    printf("População: %d\n", cidade.populacao);
+    printf("Área: %.2f km²\n", cidade.area);
+    printf("PIB Total: %.2f\n", cidade.pib);
+    printf("Densidade Populacional: %.2f habitantes por km²\n", cidade.densidade_populacional);
+    printf("PIB per Capita: %.2f\n", cidade.pib_per_capita);
+}
 
-    printf("Digite a população da cidade: ");
-    scanf("%d", &populacao);
+int main() {
+    int n;
+    printf("Quantas cidades deseja cadastrar? ");
+    scanf("%d", &n);
 
-    printf("Digite a área da cidade (em km²): ");
-    scanf("%f", &area);
+    struct Cidade cidades[n];
 
-    printf("Digite o PIB total da cidade: ");
-    scanf("%f", &pib);
+    for (int i = 0; i < n; i++) {
+        printf("\nDigite os dados da cidade %d:\n", i + 1);
 
-    densidade_populacional = populacao / area;
-    pib_per_capita = pib / populacao;
+        printf("Código: ");
+        scanf("%d", &cidades[i].codigo);
+        
+        getchar();
+        printf("Nome: ");
+        fgets(cidades[i].nome, sizeof(cidades[i].nome), stdin);
 
-    printf("\nDados da cidade:\n");
-    printf("Código: %d\n", codigo);
-    printf("Nome: %s", nome);
-    printf("População: %d\n", populacao);
-    printf("Área: %.2f km²\n", area);
-    printf("PIB Total: %.2f\n", pib);
-    printf("Densidade Populacional: %.2f habitantes por km²\n", densidade_populacional);
-    printf("PIB per Capita: %.2f\n", pib_per_capita);
+        printf("População: ");
+        scanf("%d", &cidades[i].populacao);
 
+        printf("Área: ");
+        scanf("%f", &cidades[i].area);
+
+        printf("PIB: ");
+        scanf("%f", &cidades[i].pib);
+
+        calcularDensidade(&cidades[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        exibirCidade(cidades[i]);
+    }
+
+    return 0;
+}
 
 
 
