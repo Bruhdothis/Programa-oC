@@ -1,27 +1,19 @@
 #include <stdio.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
-
-int main() { 
-    
+int main() {
     int codigo;
     char nome[50];
     int populacao;
-    float area;
-    float pib;
-    int pontosTuristicos;
-
-    printf("Cadastro de Cidade\n");
+    float area, pib;
+    float densidade_populacional;
+    float pib_per_capita;
 
     printf("Digite o código da cidade: ");
     scanf("%d", &codigo);
 
     printf("Digite o nome da cidade: ");
-    scanf(" %[^\n]", nome);  
+    getchar();
+    fgets(nome, sizeof(nome), stdin);
 
     printf("Digite a população da cidade: ");
     scanf("%d", &populacao);
@@ -29,19 +21,22 @@ int main() {
     printf("Digite a área da cidade (em km²): ");
     scanf("%f", &area);
 
-    printf("Digite o PIB da cidade (em bilhões): ");
+    printf("Digite o PIB total da cidade: ");
     scanf("%f", &pib);
 
-    printf("Digite o número de pontos turísticos: ");
-    scanf("%d", &pontosTuristicos);
+    densidade_populacional = populacao / area;
+    pib_per_capita = pib / populacao;
 
-    printf("\n--- Dados da Cidade Cadastrada ---\n");
+    printf("\nDados da cidade:\n");
     printf("Código: %d\n", codigo);
-    printf("Nome: %s\n", nome);
-    printf("População: %d habitantes\n", populacao);
+    printf("Nome: %s", nome);
+    printf("População: %d\n", populacao);
     printf("Área: %.2f km²\n", area);
-    printf("PIB: R$ %.2f bilhões\n", pib);
-    printf("Pontos Turísticos: %d\n", pontosTuristicos);
+    printf("PIB Total: %.2f\n", pib);
+    printf("Densidade Populacional: %.2f habitantes por km²\n", densidade_populacional);
+    printf("PIB per Capita: %.2f\n", pib_per_capita);
+
+
 
 
 
